@@ -1,0 +1,55 @@
+<div class="card">
+    <h2>Tabla para hacer un filtro desde un rest api</h2>
+    <p>Esta es una prueba en Angular y PrimeNG.</p>
+    <p-table #dt2 [value]="employees" dataKey="id" [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" styleClass="p-datatable-customers" [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [globalFilterFields]="['employee_name','employee_salary','employee_age']">
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex">
+                <span class="p-input-icon-left p-ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt2.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th pSortableColumn="employee_salary">Salary
+                    <p-sortIcon field="employee_salary"></p-sortIcon>
+                </th>
+                <th>Id</th>
+            </tr>
+            <tr>
+                <th>
+                    <p-columnFilter type="text" field="employee_name"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="employee_age"></p-columnFilter>
+                </th>
+
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-customer>
+            <tr>
+                <td>
+                    {{customer.employee_name}}
+                </td>
+                <td>
+                    <span class="image-text">{{customer.employee_age}}</span>
+                </td>
+                <td>
+                    <span class="image-text">{{customer.employee_salary}}</span>
+                </td>
+                <td>
+                    <span class="image-text"> {{customer.id}}</span>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="5">No customers found.</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
